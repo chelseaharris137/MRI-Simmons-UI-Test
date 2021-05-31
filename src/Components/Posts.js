@@ -50,7 +50,7 @@ const Posts = () => {
           <Button size='small'>Learn More</Button>
         </CardActions>
       </Card>
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ height: 400, width: '99%' }}>
         <Button className={classes.loadmore} variant='outlined' color='primary'>
           SHOW MORE
         </Button>

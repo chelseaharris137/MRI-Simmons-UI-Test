@@ -14,13 +14,13 @@ const BootstrapInput = withStyles((theme) => ({
     }
   },
   input: {
-    minWidth: '350px',
+    minWidth: 345,
     borderRadius: 4,
     position: 'relative',
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #ced4da',
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
+    padding: '10px 26px 10px 20px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
@@ -50,13 +50,14 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    marginLeft: theme.spacing(1)
   }
 }))
 
 const DropDown = () => {
   const [authors, setAuthors] = useState([])
+  const [selected, setSelected] = useState()
+  const [count, setCount] = useState()
   const classes = useStyles()
 
   useEffect(() => {
@@ -64,28 +65,39 @@ const DropDown = () => {
       .then((response) => response.json())
       .then((json) => {
         setAuthors(json)
-        console.log(json)
       })
   }, [])
 
   return (
     <div className={classes.root}>
-      <Grid container justify='center' spacing={1}>
-        <Grid item sm={12} md={6}>
+      <Grid container justify='left' spacing={1}>
+        <Grid item xs={6} sm={12} md={12}>
           <FormControl className={classes.margin}>
-            <InputLabel htmlFor='demo-customized-select-native'>Author</InputLabel>
-            <NativeSelect id='demo-customized-select-native' input={<BootstrapInput />}>
+            <InputLabel id='author' htmlFor='author-select'>
+              Author
+            </InputLabel>
+            <NativeSelect
+              labelId='author'
+              id='author-select'
+              input={<BootstrapInput />}
+              onChange={(e) =>
+                setSelected({
+                  author: e.target.value,
+                  id: e.target.options[e.target.options.selectedIndex].getAttribute('authorId')
+                })
+              }
+            >
               <option aria-label='None' value='Author' />
               {authors.map((elem) => (
-                <option key={elem.id}>{elem.name}</option>
+                <option key={elem.id} authorId={elem.id} value={elem.name}>
+                  {elem.name}
+                </option>
               ))}
             </NativeSelect>
           </FormControl>
-        </Grid>
-        <Grid item sm={12} md={6}>
           <FormControl className={classes.margin}>
             <InputLabel htmlFor='demo-customized-select-native'>Count</InputLabel>
-            <NativeSelect id='demo-customized-select-native' input={<BootstrapInput />}>
+            <NativeSelect id='demo-customized-select-native' input={<BootstrapInput />} onChange={(e) => setCount(e.target.value)}>
               <option aria-label='None' value='Count' />
               <option value={2}>2</option>
               <option value={5}>5</option>
