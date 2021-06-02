@@ -5,7 +5,7 @@ import Badge from '@material-ui/core/Badge'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import CommentIcon from '@material-ui/icons/Comment';
+import CommentIcon from '@material-ui/icons/Comment'
 
 const useStyles = makeStyles({
   root: {
@@ -26,9 +26,10 @@ const useStyles = makeStyles({
   }
 })
 
-const Posts = ({ selected, count }) => {
+const Posts = ({ selected, count, setCount }) => {
   const [posts, setPosts] = useState()
   const [comments, setComments] = useState()
+  const [loadMore, setLoadMore] = useState(false)
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -81,14 +82,34 @@ const Posts = ({ selected, count }) => {
             ))
         : ''}
       <div style={{ height: 400, width: '99%' }}>
-        <Button
-          className={classes.loadmore}
-          onClick={() => {console.log('hello')}}
-          variant='outlined'
-          color='primary'
-        >
-          SHOW MORE
-        </Button>
+        {loadMore ? (<Button
+            className={classes.loadmore}
+            onClick={() => {
+              if (count === 10) {
+                setCount(5)
+              } else if (count === 5) {
+                setCount(2)
+                setLoadMore(false)
+              }
+            }}
+            variant='outlined'
+            color='primary'
+          >
+            SHOW LESS
+          </Button>
+        ) : (
+          <Button
+            className={classes.loadmore}
+            onClick={() => {
+              setCount(10)
+              setLoadMore(true)
+            }}
+            variant='outlined'
+            color='primary'
+          >
+            SHOW MORE
+          </Button>
+        )}
       </div>
     </div>
   )
