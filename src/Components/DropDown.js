@@ -46,7 +46,7 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 800,
+    justifyContent: 'center',
     marginTop: theme.spacing(3)
   },
   margin: {
@@ -72,47 +72,49 @@ const DropDown = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
-          <FormControl className={classes.margin}>
-            <InputLabel id='author' htmlFor='author-select'>
-              Author
-            </InputLabel>
-            <NativeSelect
-              labelId='author'
-              id='author-select'
-              input={<BootstrapInput />}
-              onChange={(e) =>
-                setSelected({
-                  author: e.target.value,
-                  id: e.target.options[e.target.options.selectedIndex].getAttribute('authorId')
-                })
-              }
-            >
-              <option aria-label='None' value='Author' />
-              {authors.map((elem) => (
-                <option key={elem.id} authorId={elem.id} value={elem.name}>
-                  {elem.name}
-                </option>
-              ))}
-            </NativeSelect>
-          </FormControl>
+      <div style={{ maxWidth: 800 }}>
+        <Grid container justify='center' spacing={1}>
+          <Grid item xs={12} sm={6} md={6} lg={6}>
+            <FormControl className={classes.margin}>
+              <InputLabel id='author' htmlFor='author-select'>
+                Author
+              </InputLabel>
+              <NativeSelect
+                labelId='author'
+                id='author-select'
+                input={<BootstrapInput />}
+                onChange={(e) =>
+                  setSelected({
+                    author: e.target.value,
+                    id: e.target.options[e.target.options.selectedIndex].getAttribute('authorId')
+                  })
+                }
+              >
+                <option aria-label='None' value='Author' />
+                {authors.map((elem) => (
+                  <option key={elem.id} authorId={elem.id} value={elem.name}>
+                    {elem.name}
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={6}>
+            <FormControl className={classes.margin}>
+              <InputLabel htmlFor='count-select'>Count</InputLabel>
+              <NativeSelect id='count-select' input={<BootstrapInput />} onChange={(e) => setCount(e.target.value)}>
+                <option aria-label='None' value='Count' />
+                <option value={2}>2</option>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+              </NativeSelect>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <Posts selected={selected} count={count} setCount={setCount} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
-          <FormControl className={classes.margin}>
-            <InputLabel htmlFor='count-select'>Count</InputLabel>
-            <NativeSelect id='count-select' input={<BootstrapInput />} onChange={(e) => setCount(e.target.value)}>
-              <option aria-label='None' value='Count' />
-              <option value={2}>2</option>
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-            </NativeSelect>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Posts selected={selected} count={count} setCount={setCount} />
-        </Grid>
-      </Grid>
+      </div>
     </div>
   )
 }

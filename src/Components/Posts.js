@@ -82,7 +82,11 @@ const Posts = ({ selected, count, setCount }) => {
             ))
         : ''}
       <div style={{ height: 400, width: '99%' }}>
-        {loadMore ? (<Button
+        {/* dont show the button unless something is selected */}
+        {!count ? (
+          ''
+        ) : loadMore ? (
+          <Button
             className={classes.loadmore}
             onClick={() => {
               if (count === 10) {

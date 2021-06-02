@@ -8,7 +8,7 @@ const App = () => {
     <React.Fragment>
       <CssBaseline />
       <Container fixed>
-        <DropDown />
+        <DropDown style={{ backgroundColor: '#fff', height: '100vh' }} />
       </Container>
     </React.Fragment>
   )
