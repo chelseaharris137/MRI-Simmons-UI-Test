@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
+import Badge from '@material-ui/core/Badge'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import CommentIcon from '@material-ui/icons/Comment';
 
 const useStyles = makeStyles({
   root: {
@@ -27,8 +29,6 @@ const useStyles = makeStyles({
 const Posts = ({ selected, count }) => {
   const [posts, setPosts] = useState()
   const [comments, setComments] = useState()
-  const [filteredComments, setFilterComments] = useState()
-  const [commentAmount, setCommentAmount] = useState(0)
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -47,13 +47,13 @@ const Posts = ({ selected, count }) => {
   }, [])
 
   const findComments = (comments, postid) => {
-    let count = 0
+    let commentCount = 0
     comments.forEach((comment) => {
       if (comment.postId === postid) {
-        count = count + 1
+        commentCount = commentCount + 1
       }
     })
-    return count
+    return commentCount
   }
 
   const classes = useStyles()
@@ -72,15 +72,21 @@ const Posts = ({ selected, count }) => {
                   <Typography variant='body1' component='p'>
                     {elem.body}
                   </Typography>
-                  <Typography variant='body1' component='p'>
-                    {findComments(comments, elem.id)}
-                  </Typography>
+                  <br />
+                  <Badge badgeContent={findComments(comments, elem.id)} color='primary'>
+                    <CommentIcon />
+                  </Badge>
                 </CardContent>
               </Card>
             ))
         : ''}
       <div style={{ height: 400, width: '99%' }}>
-        <Button className={classes.loadmore} onClick={()=>{}} variant='outlined' color='primary'>
+        <Button
+          className={classes.loadmore}
+          onClick={() => {console.log('hello')}}
+          variant='outlined'
+          color='primary'
+        >
           SHOW MORE
         </Button>
       </div>
