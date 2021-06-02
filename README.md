@@ -36,7 +36,11 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-[INSERT DESKTOP AND MOBILE DEMO HERE]
+Desktop demo:
+<img src="readme-images/MRI-desktop-demo.gif">
+<br/><br/>
+Mobile demo:
+<img src="readme-images/MRI-mobile-demo.gif">
 
 <!-- LICENSE -->
 ## License

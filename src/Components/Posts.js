@@ -82,7 +82,6 @@ const Posts = ({ selected, count, setCount }) => {
             ))
         : ''}
       <div style={{ height: 400, width: '99%' }}>
-        {/* dont show the button unless something is selected */}
         {!count ? (
           ''
         ) : loadMore ? (
