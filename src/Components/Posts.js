@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 const Posts = ({ selected, count, setCount }) => {
   const [posts, setPosts] = useState()
   const [comments, setComments] = useState()
-  const [loadMore, setLoadMore] = useState(false)
+  const [loadMore, setLoadMore] = useState(true)
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -81,36 +81,44 @@ const Posts = ({ selected, count, setCount }) => {
               </Card>
             ))
         : ''}
+
       <div style={{ height: 400, width: '99%' }}>
         {!count ? (
           ''
-        ) : loadMore ? (
+        ) : loadMore && Number(count) === 2 ? (
           <Button
             className={classes.loadmore}
             onClick={() => {
-              if (count === 10) {
-                setCount(5)
-              } else if (count === 5) {
-                setCount(2)
-                setLoadMore(false)
-              }
-            }}
-            variant='outlined'
-            color='primary'
-          >
-            SHOW LESS
-          </Button>
-        ) : (
-          <Button
-            className={classes.loadmore}
-            onClick={() => {
-              setCount(10)
-              setLoadMore(true)
+              setCount(5)
             }}
             variant='outlined'
             color='primary'
           >
             SHOW MORE
+          </Button>
+        ) : loadMore && Number(count) === 5 ? (
+          <Button
+            className={classes.loadmore}
+            onClick={() => {
+              setCount(10)
+              setLoadMore(false)
+            }}
+            variant='outlined'
+            color='primary'
+          >
+            SHOW MORE
+          </Button>
+        ) : (
+          <Button
+            className={classes.loadmore}
+            onClick={() => {
+              setCount(2)
+              setLoadMore(true)
+            }}
+            variant='outlined'
+            color='primary'
+          >
+            SHOW LESS
           </Button>
         )}
       </div>
