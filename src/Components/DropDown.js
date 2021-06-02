@@ -71,7 +71,7 @@ const DropDown = () => {
   return (
     <div className={classes.root}>
       <Grid container justify='left' spacing={1}>
-        <Grid item xs={6} sm={12} md={12}>
+        <Grid item xs={6} sm={12} md={12} lg={12}>
           <FormControl className={classes.margin}>
             <InputLabel id='author' htmlFor='author-select'>
               Author
@@ -106,7 +106,7 @@ const DropDown = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12}>
-          <Posts />
+          <Posts selected={selected} count={count} />
         </Grid>
       </Grid>
     </div>
