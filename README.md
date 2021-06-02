@@ -36,10 +36,10 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Desktop demo:
+Desktop demo:<br/>
 <img src="readme-images/MRI-desktop-demo.gif">
 <br/><br/>
-Mobile demo:
+Mobile demo:<br/>
 <img src="readme-images/MRI-mobile-demo.gif">
 
 <!-- LICENSE -->
