@@ -14,7 +14,7 @@ const BootstrapInput = withStyles((theme) => ({
     }
   },
   input: {
-    minWidth: 345,
+    width: '100%',
     borderRadius: 4,
     position: 'relative',
     backgroundColor: theme.palette.background.paper,
@@ -46,11 +46,13 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 800
+    maxWidth: 800,
+    marginTop: theme.spacing(3)
   },
   margin: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    width: '98%'
   }
 }))
 
@@ -70,8 +72,8 @@ const DropDown = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container justify='left' spacing={1}>
-        <Grid item xs={6} sm={12} md={12} lg={12}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
           <FormControl className={classes.margin}>
             <InputLabel id='author' htmlFor='author-select'>
               Author
@@ -95,9 +97,11 @@ const DropDown = () => {
               ))}
             </NativeSelect>
           </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
           <FormControl className={classes.margin}>
-            <InputLabel htmlFor='demo-customized-select-native'>Count</InputLabel>
-            <NativeSelect id='demo-customized-select-native' input={<BootstrapInput />} onChange={(e) => setCount(e.target.value)}>
+            <InputLabel htmlFor='count-select'>Count</InputLabel>
+            <NativeSelect id='count-select' input={<BootstrapInput />} onChange={(e) => setCount(e.target.value)}>
               <option aria-label='None' value='Count' />
               <option value={2}>2</option>
               <option value={5}>5</option>
@@ -106,7 +110,7 @@ const DropDown = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12}>
-          <Posts selected={selected} count={count} />
+          <Posts selected={selected} count={count} setCount={setCount} />
         </Grid>
       </Grid>
     </div>
